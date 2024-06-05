@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form | CodingLab</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="title"><span>Login Form</span></div>
+            <form id="loginForm">
+                <div class="row">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Email or Phone" required>
+                </div>
+                <div class="row">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="pass"><a href="#">Forgot password?</a></div>
+                <div class="row button">
+                    <input type="submit" value="Login" id="loginButton">
+                </div>
+                <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.status === 200) {
+                    localStorage.setItem('token', data.token);
+                    alert('Login successful!');
+                    window.location.href = 'hello.html';
+                } else {
+                    if (data.attempts >= 3) {
+                        alert('錯誤3次，請10分鐘之後再登入');
+                        document.getElementById('loginButton').disabled = true; // 禁用提交按鈕
+                    } else {
+                        alert('密碼錯誤，您還有 ' + (3 - data.attempts) + ' 次嘗試。');
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred during login. Please try again later.');
+            }
+        });
+    </script>
+</body>
+</html>

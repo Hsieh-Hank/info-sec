@@ -1,0 +1,68 @@
+/* 添加這段樣式到你的 style.css 文件中 */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #00a896;
+    margin: 0;
+}
+
+.container {
+    width: 400px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.row {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.row i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    color: #00a896;
+}
+
+.row input {
+    width: 80%;
+    padding: 10px 10px 10px 70px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.pass, .signup-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.pass a, .signup-link a {
+    color: #00a896;
+    text-decoration: none;
+}
+
+.button input {
+    width: 100%;
+    padding: 10px;
+    background: #00a896;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
